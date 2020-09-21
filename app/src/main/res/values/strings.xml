@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DigitalLecture</string>
+    <string name="digital_lecture">Digital Lecture</string>
+    <string name="search_notes">Search Notes</string>
 </resources>
