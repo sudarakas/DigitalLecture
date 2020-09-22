@@ -1,4 +1,4 @@
-package tech.sudarakas.digitallecture;
+package tech.sudarakas.digitallecture.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
+import tech.sudarakas.digitallecture.R;
 
 public class MainActivity extends AppCompatActivity {
 
