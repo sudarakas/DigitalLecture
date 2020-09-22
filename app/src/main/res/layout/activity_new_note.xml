@@ -75,12 +75,13 @@
                 android:textColor="@color/colorIcons"
                 android:textSize="@dimen/_12ssp"
                 android:includeFontPadding="false"
+                app:layout_constraintTop_toBottomOf="@id/noteTitleInput"
                 app:layout_constraintBottom_toBottomOf="@+id/noteTitleInput"
                 app:layout_constraintEnd_toEndOf="@+id/noteTitleInput"
                 app:layout_constraintStart_toStartOf="@+id/noteTitleInput" />
 
             <EditText
-                android:id="@+id/noteSubtitleinput"
+                android:id="@+id/noteSubtitleInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_16sdp"
@@ -107,9 +108,9 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:background="@drawable/backgroud_subutitle_indi"
-                app:layout_constraintBottom_toBottomOf="@id/noteSubtitleinput"
+                app:layout_constraintBottom_toBottomOf="@id/noteSubtitleInput"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/noteSubtitleinput"/>
+                app:layout_constraintTop_toTopOf="@id/noteSubtitleInput"/>
 
             <EditText
                 android:id="@+id/noteInput"
@@ -131,7 +132,7 @@
                 android:textColorHint="@color/colorIcons"
                 android:textSize="@dimen/_13ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/noteSubtitleinput"/>
+                app:layout_constraintTop_toBottomOf="@id/noteSubtitleInput"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
