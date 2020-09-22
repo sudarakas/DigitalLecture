@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".NewNoteActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/_45sdp"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/_10sdp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true">
+
+            <ImageView
+                android:id="@+id/imageBack"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_arrow_left"
+                android:tint="@color/colorIcons"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <ImageView
+                android:id="@+id/imageDone"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:background="@drawable/backgroud_done_button"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_done"
+                android:padding="@dimen/_5sdp"
+                android:tint="@color/colorAccent"
+                app:layout_constraintBottom_toBottomOf="@id/imageBack"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/imageBack"
+                />
+
+            <EditText
+                android:id="@+id/noteTitleInput"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:background="@null"
+                android:fontFamily="@font/robotocondensedbold"
+                android:hint="@string/note_title"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:includeFontPadding="false"
+                android:inputType="text"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorTextTip"
+                android:textSize="@dimen/_18ssp"
+                app:layout_constraintTop_toBottomOf="@id/imageBack"
+                />
+
+            <TextView
+                android:id="@+id/dateTimeText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eczarregular"
+                android:textColor="@color/colorIcons"
+                android:textSize="@dimen/_12ssp"
+                android:includeFontPadding="false"
+                app:layout_constraintBottom_toBottomOf="@+id/noteTitleInput"
+                app:layout_constraintEnd_toEndOf="@+id/noteTitleInput"
+                app:layout_constraintStart_toStartOf="@+id/noteTitleInput" />
+
+            <EditText
+                android:id="@+id/noteSubtitleinput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:background="@null"
+                android:fontFamily="@font/robotocondensedbold"
+                android:hint="@string/note_subtitle"
+                android:importantForAutofill="no"
+                android:includeFontPadding="false"
+                android:inputType="textMultiLine"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_8sdp"
+                android:textColor="@color/colorNoteSubtitleText"
+                android:textColorHint="@color/colorIcons"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/viewSubtitleIndicator"
+                app:layout_constraintTop_toBottomOf="@id/dateTimeText"/>
+
+            <View
+                android:id="@+id/viewSubtitleIndicator"
+                android:layout_width="@dimen/_5sdp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:background="@drawable/backgroud_subutitle_indi"
+                app:layout_constraintBottom_toBottomOf="@id/noteSubtitleinput"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/noteSubtitleinput"/>
+
+            <EditText
+                android:id="@+id/noteInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:background="@null"
+                android:gravity="top"
+                android:hint="@string/enter_note_here"
+                android:importantForAutofill="no"
+                android:fontFamily="@font/robotocondensedregular"
+                android:includeFontPadding="false"
+                android:inputType="textMultiLine"
+                android:minHeight="@dimen/_100sdp"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorIcons"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/noteSubtitleinput"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
