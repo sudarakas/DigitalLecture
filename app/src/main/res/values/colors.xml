@@ -11,6 +11,7 @@
     <color name="colorTextSubtitle">#045D56</color>
     <color name="colorDefaultNote">#303030</color>
     <color name="colorNoteSubtitleText">#FAFAFA</color>
+    <color name="colorNoteSubtitleTextGrey">#AAAAAA</color>
     <color name="colorOptionsMenuBackground">#303030</color>
     <color name="colorDelete">#F44336</color>
     <color name="colorSearchBackground">#333333</color>
