@@ -7,4 +7,5 @@
     <string name="enter_note_here">Enter note here</string>
     <string name="options">Options</string>
     <string name="select_color">Note Color</string>
+    <string name="add_image">Add Image</string>
 </resources>

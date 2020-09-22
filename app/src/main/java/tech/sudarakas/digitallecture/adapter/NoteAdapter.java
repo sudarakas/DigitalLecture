@@ -1,5 +1,6 @@
 package tech.sudarakas.digitallecture.adapter;
 
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
 
@@ -52,7 +55,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewPlaceh
 
     static class NoteViewPlaceholder extends RecyclerView.ViewHolder{
         private TextView textTitle,textSubtitle,textDateTime;
-        LinearLayout layoutNote;
+        private LinearLayout layoutNote;
+        private RoundedImageView imageNote;
 
         public NoteViewPlaceholder(@NonNull View itemView) {
             super(itemView);
@@ -60,6 +64,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewPlaceh
             textSubtitle = (TextView) itemView.findViewById(R.id.textSubtitle);
             textDateTime = (TextView) itemView.findViewById(R.id.textDateTime);
             layoutNote = (LinearLayout) itemView.findViewById(R.id.layoutNote);
+            imageNote = (RoundedImageView) itemView.findViewById(R.id.imageNote);
         }
 
         void setNote(Note note){
@@ -76,6 +81,13 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewPlaceh
                 gradientDrawable.setColor(Color.parseColor(note.getColor()));
             }else{
                 gradientDrawable.setColor(Color.parseColor("#303030"));
+            }
+
+            if(note.getImageSrc() != null){
+                imageNote.setImageBitmap(BitmapFactory.decodeFile(note.getImageSrc()));
+                imageNote.setVisibility(View.VISIBLE);
+            }else{
+                imageNote.setVisibility(View.GONE);
             }
         }
     }

@@ -123,11 +123,39 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:includeFontPadding="false"
             android:fontFamily="@font/robotocondensedbold"
             android:text="@string/select_color"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/_12ssp"
             />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutAddImage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_margin="@dimen/_12sdp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+    
+        <ImageView
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_image"
+            android:tint="@color/colorIcons"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/robotocondensedbold"
+            android:text="@string/add_image"
+            android:includeFontPadding="false"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/_12ssp"
+            />
     </LinearLayout>
 </LinearLayout>
