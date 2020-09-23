@@ -10,6 +10,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
@@ -17,13 +18,17 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,6 +43,7 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import tech.sudarakas.digitallecture.R;
 import tech.sudarakas.digitallecture.database.NotesDatabase;
@@ -47,11 +53,14 @@ public class NewNoteActivity extends AppCompatActivity {
 
         private ImageView imageBack,imageDone,imageNote;
         private EditText noteTitleInput,noteSubtitleInput,noteInput;
-        private TextView dateTimeText;
+        private TextView dateTimeText, webURLText;
         private View viewSubtitleIndicator;
+        private LinearLayout layoutWebURL;
 
         private String selectedNoteColor;
-    private String selectedImagePath;
+        private String selectedImagePath;
+
+        private AlertDialog dialogAddURL;
 
         private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
         private static final int REQUEST_CODE_SELECT_IMAGE = 2;
@@ -69,6 +78,8 @@ public class NewNoteActivity extends AppCompatActivity {
             imageDone = (ImageView) findViewById(R.id.imageDone);
             viewSubtitleIndicator = (View) findViewById(R.id.viewSubtitleIndicator);
             imageNote = (ImageView) findViewById(R.id.imageNote);
+            webURLText = (TextView) findViewById(R.id.textWEBURL);
+            layoutWebURL = (LinearLayout) findViewById(R.id.layoutWEBURL);
 
             //Back button on the canvas
             imageBack.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +127,10 @@ public class NewNoteActivity extends AppCompatActivity {
             note.setDateTime(dateTimeText.getText().toString());
             note.setColor(selectedNoteColor);
             note.setImageSrc(selectedImagePath);
+
+            if(layoutWebURL.getVisibility() == View.VISIBLE){
+                note.setLink(webURLText.getText().toString());
+            }
 
             @SuppressLint("StaticFieldLeak")
             class SaveNoteTask extends AsyncTask<Void, Void, Void>{
@@ -241,6 +256,15 @@ public class NewNoteActivity extends AppCompatActivity {
                 }
             }
         });
+
+//        Add URL to Note
+        layoutOptionsMenu.findViewById(R.id.layoutAddURL).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                showAddURLDialog();
+            }
+        });
     }
 
     //Change the color of subtitle indicator
@@ -304,5 +328,47 @@ public class NewNoteActivity extends AppCompatActivity {
         }
 
         return filePath;
+    }
+
+    private void showAddURLDialog() {
+            if(dialogAddURL == null){
+                AlertDialog.Builder builder = new AlertDialog.Builder(NewNoteActivity.this);
+                View view = LayoutInflater.from(this).inflate(
+                        R.layout.layout_add_url,
+                        (ViewGroup) findViewById(R.id.layoutAddURLDialog)
+                        );
+                builder.setView(view);
+
+                dialogAddURL = builder.create();
+                if(dialogAddURL.getWindow() != null){
+                    dialogAddURL.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+                }
+
+                final EditText inputURL = view.findViewById(R.id.inputURL);
+                inputURL.requestFocus();
+
+                view.findViewById(R.id.textAdd).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(inputURL.getText().toString().trim().isEmpty()){
+                            Toast.makeText(NewNoteActivity.this, "Enter URL", Toast.LENGTH_SHORT).show();
+                        }else if(!Patterns.WEB_URL.matcher(inputURL.getText().toString()).matches()){
+                            Toast.makeText(NewNoteActivity.this, "Enter valid URL", Toast.LENGTH_SHORT).show();
+                        }else {
+                            webURLText.setText(inputURL.getText().toString());
+                            layoutWebURL.setVisibility(View.VISIBLE);
+                            dialogAddURL.dismiss();
+                        }
+                    }
+                });
+
+                view.findViewById(R.id.textCancel).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialogAddURL.dismiss();
+                    }
+                });
+            }
+            dialogAddURL.show();
     }
 }
