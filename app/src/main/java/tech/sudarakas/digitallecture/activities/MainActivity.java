@@ -19,14 +19,18 @@ import tech.sudarakas.digitallecture.R;
 import tech.sudarakas.digitallecture.adapter.NoteAdapter;
 import tech.sudarakas.digitallecture.database.NotesDatabase;
 import tech.sudarakas.digitallecture.entities.Note;
+import tech.sudarakas.digitallecture.listeners.NoteListener;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NoteListener {
 
-    public  static final int REQUEST_CODE_ADD_NOTE = 1;
+    public  static final int REQUEST_CODE_ADD_NOTE = 1; //new note
+    public  static final int REQUEST_CODE_UPDATE_NOTE = 2;  //updated
+    public  static final int REQUEST_CODE_SHOW_NOTES = 3; //all notes
 
     private RecyclerView mainRecyclerView;
     private List<Note> noteList;
     private NoteAdapter noteAdapter;
+    private int noteClickedPosition = -1;
 
     private ImageView imageAddNewNoteMain;
     @Override
@@ -50,13 +54,22 @@ public class MainActivity extends AppCompatActivity {
         );
 
         noteList = new ArrayList<>();
-        noteAdapter = new NoteAdapter(noteList);
+        noteAdapter = new NoteAdapter(noteList, this);
         mainRecyclerView.setAdapter(noteAdapter);
 
-        getNotes();
+        getNotes(REQUEST_CODE_SHOW_NOTES);
     }
 
-    private void getNotes(){
+    @Override
+    public void onNoteClicked(Note note, int position) {
+        noteClickedPosition = position;
+        Intent intent = new Intent(getApplicationContext(), NewNoteActivity.class);
+        intent.putExtra("isViewOrUpdate", true);
+        intent.putExtra("note", note);
+        startActivityForResult(intent, REQUEST_CODE_UPDATE_NOTE);
+    }
+
+    private void getNotes(final int requestCode){
         class GetNoteTask extends AsyncTask<Void, Void, List<Note>>{
 
             @Override
@@ -69,15 +82,18 @@ public class MainActivity extends AppCompatActivity {
             protected void onPostExecute(List<Note> notes) {
                 super.onPostExecute(notes);
                 //Log.d("Notes", notes.toString());
-                if(noteList.size() == 0){
+                if(requestCode == REQUEST_CODE_SHOW_NOTES){
                     noteList.addAll(notes);
                     noteAdapter.notifyDataSetChanged();
-                }else {
-                    noteList.add(0,notes.get(0));
-                    noteAdapter.notifyDataSetChanged();
+                }else if(requestCode == REQUEST_CODE_ADD_NOTE){
+                    noteList.add(0, notes.get(0));
+                    noteAdapter.notifyItemInserted(0);
+                    mainRecyclerView.smoothScrollToPosition(0);
+                }else if(requestCode == REQUEST_CODE_UPDATE_NOTE){
+                    noteList.remove(noteClickedPosition);
+                    noteList.add(noteClickedPosition, notes.get(noteClickedPosition));
+                    noteAdapter.notifyItemChanged(noteClickedPosition);
                 }
-
-                mainRecyclerView.smoothScrollToPosition(0);
             }
         }
         new GetNoteTask().execute();
@@ -87,7 +103,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_CODE_ADD_NOTE && resultCode == RESULT_OK) {
-            getNotes();
+            getNotes(REQUEST_CODE_ADD_NOTE);
+        }else if(requestCode == REQUEST_CODE_UPDATE_NOTE && resultCode ==RESULT_OK){
+            if(data != null){
+                getNotes(REQUEST_CODE_UPDATE_NOTE);
+            }
         }
     }
 }

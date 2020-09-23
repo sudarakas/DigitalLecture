@@ -62,6 +62,8 @@ public class NewNoteActivity extends AppCompatActivity {
 
         private AlertDialog dialogAddURL;
 
+        private Note existingNote;
+
         private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
         private static final int REQUEST_CODE_SELECT_IMAGE = 2;
 
@@ -105,8 +107,33 @@ public class NewNoteActivity extends AppCompatActivity {
 
             selectedNoteColor = "#303030";
             selectedImagePath = "";
+
+            if(getIntent().getBooleanExtra("isViewOrUpdate", false)){
+                existingNote = (Note) getIntent().getSerializableExtra("note");
+                setViewUpdateNote();
+            }
+
             initOptionsMenu();
             setViewSubtitleIndicator();
+        }
+
+        private void setViewUpdateNote(){
+            noteTitleInput.setText(existingNote.getTitle());
+            noteSubtitleInput.setText(existingNote.getSubtitle());
+            noteInput.setText(existingNote.getNoteContent());
+            dateTimeText.setText(existingNote.getDateTime());
+
+            if(existingNote.getImageSrc() != null && !existingNote.getImageSrc().trim().isEmpty()){
+                imageNote.setImageBitmap(BitmapFactory.decodeFile(existingNote.getImageSrc()));
+                imageNote.setVisibility(View.VISIBLE);
+                selectedImagePath = existingNote.getImageSrc();
+            }
+
+            if(existingNote.getLink() != null && !existingNote.getLink().trim().isEmpty()){
+                webURLText.setText(existingNote.getLink());
+                layoutWebURL.setVisibility(View.VISIBLE);
+            }
+
         }
 
     //Save new note function
@@ -130,6 +157,10 @@ public class NewNoteActivity extends AppCompatActivity {
 
             if(layoutWebURL.getVisibility() == View.VISIBLE){
                 note.setLink(webURLText.getText().toString());
+            }
+
+            if(existingNote != null){
+                note.setId(existingNote.getId());
             }
 
             @SuppressLint("StaticFieldLeak")
@@ -237,6 +268,23 @@ public class NewNoteActivity extends AppCompatActivity {
                 setViewSubtitleIndicator();
             }
         });
+
+        if(existingNote != null && existingNote.getColor() != null && !existingNote.getColor().trim().isEmpty()){
+            switch (existingNote.getColor()){
+                case "#FFCF44":
+                    layoutOptionsMenu.findViewById(R.id.viewColor2).performClick();
+                    break;
+                case "#B15DFF":
+                    layoutOptionsMenu.findViewById(R.id.viewColor3).performClick();
+                    break;
+                case "#FF6859":
+                    layoutOptionsMenu.findViewById(R.id.viewColor4).performClick();
+                    break;
+                case "#72DEFF":
+                    layoutOptionsMenu.findViewById(R.id.viewColor5).performClick();
+                    break;
+            }
+        }
 
         //Add Image to Note
         layoutOptionsMenu.findViewById(R.id.layoutAddImage).setOnClickListener(new View.OnClickListener() {

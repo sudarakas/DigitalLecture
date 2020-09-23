@@ -18,12 +18,17 @@ import java.util.List;
 
 import tech.sudarakas.digitallecture.R;
 import tech.sudarakas.digitallecture.entities.Note;
+import tech.sudarakas.digitallecture.listeners.NoteListener;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewPlaceholder>{
-    private List<Note> notes;
 
-    public NoteAdapter(List<Note> notes) {
+    private List<Note> notes;
+    private NoteListener noteListener;
+
+    public NoteAdapter(List<Note> notes,NoteListener noteListener) {
+
         this.notes = notes;
+        this.noteListener = noteListener;
     }
 
     @NonNull
@@ -39,8 +44,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewPlaceh
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NoteViewPlaceholder holder, int position) {
+    public void onBindViewHolder(@NonNull NoteViewPlaceholder holder, final int position) {
         holder.setNote(notes.get(position));
+        holder.layoutNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                noteListener.onNoteClicked(notes.get(position), position);
+            }
+        });
     }
 
     @Override
