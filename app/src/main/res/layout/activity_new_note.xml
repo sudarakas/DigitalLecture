@@ -123,7 +123,29 @@
                 android:contentDescription="@string/app_name"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/viewSubtitleIndicator"/>
+            <LinearLayout
+                android:id="@+id/layoutWEBURL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:gravity="center_vertical"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/imageNote">
 
+                <TextView
+                    android:id="@+id/textWEBURL"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:autoLink="web"
+                    android:fontFamily="@font/robotocondensedregular"
+                    android:includeFontPadding="false"
+                    android:textSize="@dimen/_13ssp"/>
+
+            </LinearLayout>
             <EditText
                 android:id="@+id/noteInput"
                 android:layout_width="match_parent"
@@ -144,7 +166,7 @@
                 android:textColorHint="@color/colorIcons"
                 android:textSize="@dimen/_13ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageNote"/>
+                app:layout_constraintTop_toBottomOf="@id/layoutWEBURL"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
