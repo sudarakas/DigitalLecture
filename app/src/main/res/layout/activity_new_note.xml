@@ -123,6 +123,19 @@
                 android:contentDescription="@string/app_name"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/viewSubtitleIndicator"/>
+
+            <ImageView
+                android:id="@+id/imageImageDelete"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:src="@drawable/ic_delete"
+                android:tint="@color/colorDelete"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/imageNote"
+                app:layout_constraintTop_toTopOf="@id/imageNote"/>
+
             <LinearLayout
                 android:id="@+id/layoutWEBURL"
                 android:layout_width="match_parent"
@@ -144,6 +157,15 @@
                     android:fontFamily="@font/robotocondensedregular"
                     android:includeFontPadding="false"
                     android:textSize="@dimen/_13ssp"/>
+
+                <ImageView
+                    android:id="@+id/imageURLDelete"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/ic_delete"
+                    android:tint="@color/colorDelete"
+                    tools:ignore="InvalidId"
+                    android:contentDescription="@string/app_name"/>
 
             </LinearLayout>
             <EditText
