@@ -113,6 +113,24 @@ public class NewNoteActivity extends AppCompatActivity {
                 setViewUpdateNote();
             }
 
+            findViewById(R.id.imageURLDelete).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    webURLText.setText(null);
+                    layoutWebURL.setVisibility(View.GONE);
+                }
+            });
+
+            findViewById(R.id.imageImageDelete).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    imageNote.setImageBitmap(null);
+                    imageNote.setVisibility(View.GONE);
+                    findViewById(R.id.imageImageDelete).setVisibility(View.GONE);
+                    selectedImagePath="";
+                }
+            });
+
             initOptionsMenu();
             setViewSubtitleIndicator();
         }
@@ -126,6 +144,7 @@ public class NewNoteActivity extends AppCompatActivity {
             if(existingNote.getImageSrc() != null && !existingNote.getImageSrc().trim().isEmpty()){
                 imageNote.setImageBitmap(BitmapFactory.decodeFile(existingNote.getImageSrc()));
                 imageNote.setVisibility(View.VISIBLE);
+                findViewById(R.id.imageImageDelete).setVisibility(View.VISIBLE);
                 selectedImagePath = existingNote.getImageSrc();
             }
 
@@ -353,6 +372,7 @@ public class NewNoteActivity extends AppCompatActivity {
                         Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                         imageNote.setImageBitmap(bitmap);
                         imageNote.setVisibility(View.VISIBLE);
+                        findViewById(R.id.imageImageDelete).setVisibility(View.VISIBLE);
 
                         selectedImagePath = getPathFromUri(selectImageUri);
                     }catch (Exception exception){
