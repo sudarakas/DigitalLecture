@@ -139,4 +139,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewPlaceh
             }
         }, 500);
     }
+
+    public void cancelTimer(){
+        if(timer != null){
+            timer.cancel();
+        }
+    }
 }
