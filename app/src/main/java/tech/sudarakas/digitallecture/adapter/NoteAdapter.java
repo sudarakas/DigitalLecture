@@ -3,6 +3,8 @@ package tech.sudarakas.digitallecture.adapter;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import tech.sudarakas.digitallecture.R;
 import tech.sudarakas.digitallecture.entities.Note;
@@ -24,11 +29,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewPlaceh
 
     private List<Note> notes;
     private NoteListener noteListener;
+    private Timer timer;
+    private List<Note> noteSource;
 
     public NoteAdapter(List<Note> notes,NoteListener noteListener) {
 
         this.notes = notes;
         this.noteListener = noteListener;
+        noteSource = notes;
     }
 
     @NonNull
@@ -101,5 +109,34 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewPlaceh
                 imageNote.setVisibility(View.GONE);
             }
         }
+    }
+
+    public void searchNotes(final String keyword){
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (keyword.trim().isEmpty()) {
+                    notes = noteSource;
+                } else {
+                    ArrayList<Note> tempNotes = new ArrayList<>();
+                    for (Note note : noteSource) {
+                        if (note.getTitle().toLowerCase().contains(keyword.toLowerCase())
+                                || note.getSubtitle().toLowerCase().contains(keyword.toLowerCase())
+                                || note.getNoteContent().toLowerCase().contains(keyword.toLowerCase())) {
+                            tempNotes.add(note);
+                        }
+                    }
+                    notes = tempNotes;
+                }
+
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        notifyDataSetChanged();
+                    }
+                });
+            }
+        }, 500);
     }
 }
