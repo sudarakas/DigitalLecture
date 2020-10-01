@@ -84,7 +84,7 @@
         android:background="@color/colorQuickActionMenu"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/_20sdp"
+        android:padding="@dimen/_10sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         >
         <ImageView
