@@ -9,17 +9,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -51,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements NoteListener {
 
     private ImageView imageNewNote;
     private ImageView imageNewImage;
+    private ImageView imageNewLink;
+
+    private AlertDialog dialogAddURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements NoteListener {
                 );
             }
         });
-
+        //Image Note
         imageNewImage = (ImageView) findViewById(R.id.imageNewImage);
         imageNewImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +135,15 @@ public class MainActivity extends AppCompatActivity implements NoteListener {
                 }else{
                     chooseImage();
                 }
+            }
+        });
+
+        //Link Note
+        imageNewLink = (ImageView) findViewById(R.id.imageNewLink);
+        imageNewLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAddURLDialog();
             }
         });
 
@@ -231,7 +249,6 @@ public class MainActivity extends AppCompatActivity implements NoteListener {
                             intent.putExtra("isFromQuickAction", true);
                             intent.putExtra("quickActionType", "image");
                             intent.putExtra("imagePath", selectImagePath);
-                        Log.d("photo","here");
                             startActivityForResult(intent, REQUEST_CODE_ADD_NOTE);
                     }catch (Exception exception){
                         Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
@@ -240,7 +257,52 @@ public class MainActivity extends AppCompatActivity implements NoteListener {
             }
 
         }else{
-            Log.d("photo", String.valueOf(requestCode));
+            Log.d("ERROR", "SOMETHING WRONG");
         }
+    }
+
+    private void showAddURLDialog() {
+        if(dialogAddURL == null){
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            View view = LayoutInflater.from(this).inflate(
+                    R.layout.layout_add_url,
+                    (ViewGroup) findViewById(R.id.layoutAddURLDialog)
+            );
+            builder.setView(view);
+
+            dialogAddURL = builder.create();
+            if(dialogAddURL.getWindow() != null){
+                dialogAddURL.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+            }
+
+            final EditText inputURL = view.findViewById(R.id.inputURL);
+            inputURL.requestFocus();
+
+            view.findViewById(R.id.textAdd).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(inputURL.getText().toString().trim().isEmpty()){
+                        Toast.makeText(MainActivity.this, "Enter URL", Toast.LENGTH_SHORT).show();
+                    }else if(!Patterns.WEB_URL.matcher(inputURL.getText().toString()).matches()){
+                        Toast.makeText(MainActivity.this, "Enter valid URL", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Intent intent = new Intent(getApplicationContext(), NewNoteActivity.class);
+                        intent.putExtra("isFromQuickAction", true);
+                        intent.putExtra("quickActionType", "URL");
+                        intent.putExtra("URL", inputURL.getText().toString());
+                        startActivityForResult(intent, REQUEST_CODE_ADD_NOTE);
+                        dialogAddURL.dismiss();
+                    }
+                }
+            });
+
+            view.findViewById(R.id.textCancel).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialogAddURL.dismiss();
+                }
+            });
+        }
+        dialogAddURL.show();
     }
 }
