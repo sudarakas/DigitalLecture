@@ -220,6 +220,27 @@ public class MainActivity extends AppCompatActivity implements NoteListener {
             if(data != null){
                 getNotes(REQUEST_CODE_UPDATE_NOTE, data.getBooleanExtra("isNoteDeleted", false));
             }
+        }else if(requestCode == REQUEST_CODE_SELECT_IMAGE && resultCode == RESULT_OK){
+            if(data != null){
+
+                Uri selectImageUri = data.getData();
+                if(selectImageUri != null){
+                    try {
+                            String selectImagePath = getPathFromUri(selectImageUri);
+                            Intent intent = new Intent(getApplicationContext(), NewNoteActivity.class);
+                            intent.putExtra("isFromQuickAction", true);
+                            intent.putExtra("quickActionType", "image");
+                            intent.putExtra("imagePath", selectImagePath);
+                        Log.d("photo","here");
+                            startActivityForResult(intent, REQUEST_CODE_ADD_NOTE);
+                    }catch (Exception exception){
+                        Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+        }else{
+            Log.d("photo", String.valueOf(requestCode));
         }
     }
 }
