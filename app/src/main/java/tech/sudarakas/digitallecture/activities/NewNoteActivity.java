@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -131,6 +132,21 @@ public class NewNoteActivity extends AppCompatActivity {
                     selectedImagePath="";
                 }
             });
+
+
+
+            if(getIntent().getBooleanExtra("isFromQuickAction", false)){
+                Log.d("photo",getIntent().getStringExtra("quickActionType"));
+                String type = getIntent().getStringExtra("quickActionType");
+                if(type != null){
+                    if(type.equals("image")){
+                        selectedImagePath = getIntent().getStringExtra("imagePath");
+                        imageNote.setImageBitmap(BitmapFactory.decodeFile(selectedImagePath));
+                        imageNote.setVisibility(View.VISIBLE);
+                        findViewById(R.id.imageImageDelete).setVisibility(View.VISIBLE);
+                    }
+                }
+            }
 
             initOptionsMenu();
             setViewSubtitleIndicator();
