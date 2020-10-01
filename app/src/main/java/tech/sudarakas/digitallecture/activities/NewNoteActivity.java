@@ -144,6 +144,9 @@ public class NewNoteActivity extends AppCompatActivity {
                         imageNote.setImageBitmap(BitmapFactory.decodeFile(selectedImagePath));
                         imageNote.setVisibility(View.VISIBLE);
                         findViewById(R.id.imageImageDelete).setVisibility(View.VISIBLE);
+                    }else if(type.equals("URL")){
+                        webURLText.setText(getIntent().getStringExtra("URL"));
+                        layoutWebURL.setVisibility(View.VISIBLE);
                     }
                 }
             }
