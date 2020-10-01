@@ -87,32 +87,32 @@
         android:padding="@dimen/_20sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         >
-<!--        <ImageView-->
-<!--            android:id="@+id/imageNewNote"-->
-<!--            android:layout_width="@dimen/_25sdp"-->
-<!--            android:layout_height="@dimen/_25sdp"-->
-<!--            android:contentDescription="@string/app_name"-->
-<!--            android:src="@drawable/ic_add_circle"-->
-<!--            android:tint="@color/colorIcons"-->
-<!--            />-->
-<!--        <ImageView-->
-<!--            android:id="@+id/imageNewImage"-->
-<!--            android:layout_width="@dimen/_25sdp"-->
-<!--            android:layout_height="@dimen/_25sdp"-->
-<!--            android:contentDescription="@string/app_name"-->
-<!--            android:src="@drawable/ic_image"-->
-<!--            android:layout_marginStart="@dimen/_10sdp"-->
-<!--            android:tint="@color/colorIcons"-->
-<!--            />-->
-<!--        <ImageView-->
-<!--            android:id="@+id/imageNewLink"-->
-<!--            android:layout_width="@dimen/_25sdp"-->
-<!--            android:layout_height="@dimen/_25sdp"-->
-<!--            android:contentDescription="@string/app_name"-->
-<!--            android:layout_marginStart="@dimen/_10sdp"-->
-<!--            android:src="@drawable/ic_link"-->
-<!--            android:tint="@color/colorIcons"-->
-<!--            />-->
+        <ImageView
+            android:id="@+id/imageNewNote"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_add_circle"
+            android:tint="@color/colorIcons"
+            />
+        <ImageView
+            android:id="@+id/imageNewImage"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_image"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:tint="@color/colorIcons"
+            />
+        <ImageView
+            android:id="@+id/imageNewLink"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:contentDescription="@string/app_name"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:src="@drawable/ic_link"
+            android:tint="@color/colorIcons"
+            />
     </LinearLayout>
 
     <ImageView
