@@ -28,7 +28,7 @@ $ import project
 
 ### Screenshot
 
-![App](https://i.ibb.co/z714rJD/Screenshot-20200925-113221155.jpg)
+![App](https://i.ibb.co/Nx5P3dq/Screenshot-20201003-185530816.jpg)
 ![App](https://i.ibb.co/7g7qfhj/Screenshot-20200925-113226268.jpg)
 ![App](https://i.ibb.co/7QW2Z1D/Screenshot-20200925-113230522.jpg)
 ![App](https://i.ibb.co/NWMgkQS/Screenshot-20200925-113241498.jpg)
