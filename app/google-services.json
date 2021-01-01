@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "974625878258",
+    "project_id": "digitallecture-9a14d",
+    "storage_bucket": "digitallecture-9a14d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:974625878258:android:476edd354eb5919239e06b",
+        "android_client_info": {
+          "package_name": "tech.sudarakas.digitallecture"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "974625878258-nj8ce1uu7onppj7ocfq4s8e9kskv95th.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tech.sudarakas.digitallecture",
+            "certificate_hash": "4e000f294bd874cfbb559e0c67cae6c75b8d969b"
+          }
+        },
+        {
+          "client_id": "974625878258-iecp9ma904vmcpgtj2l92utbc9in9k4j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmvdTd1zxdV1Ha1dojJ1tPlg6Za5tG2c0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "974625878258-iecp9ma904vmcpgtj2l92utbc9in9k4j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
