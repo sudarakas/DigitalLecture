@@ -27,9 +27,10 @@ $ import project
 - 
 
 ### ToDo
-  -Forgot Password
-  -Cloud Sync Notes
-  -Multiple Images
+
+  - Forgot Password
+  - Cloud Sync Notes
+  - Multiple Images
 
 ### Screenshot
 
