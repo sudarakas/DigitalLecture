@@ -59,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@+id/emailreg" />
 
     <EditText
-        android:id="@+id/passwordreg2"
+        android:id="@+id/confirmpassword"
         android:layout_width="261dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
@@ -76,7 +76,7 @@
         app:layout_constraintTop_toBottomOf="@+id/passwordreg" />
 
     <Button
-        android:id="@+id/register"
+        android:id="@+id/registerreg"
         android:layout_width="261dp"
         android:layout_height="56dp"
         android:layout_marginTop="24dp"
@@ -88,7 +88,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordreg2"
+        app:layout_constraintTop_toBottomOf="@+id/confirmpassword"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -101,7 +101,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register" />
+        app:layout_constraintTop_toBottomOf="@+id/registerreg" />
 
     <ProgressBar
         android:id="@+id/progressBarreg"
