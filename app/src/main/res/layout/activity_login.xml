@@ -82,6 +82,7 @@
         android:fontFamily="@font/robotocondensedregular"
         android:text="@string/register"
         android:textAlignment="center"
+        android:visibility="gone"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
