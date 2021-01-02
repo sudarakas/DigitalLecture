@@ -36,22 +36,21 @@ public class Login extends AppCompatActivity {
     private EditText password;
 
     private ProgressBar progressBar;
-    SharedPreferences.Editor prefsEditor;
+    private static final String LOGGED_USER = "LOGGED";
+    SharedPreferences pref = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        prefsEditor = getApplicationContext().getSharedPreferences("UserLogged", 0).edit();
-        SharedPreferences.Editor previouslyLoggedEdit = prefsEditor.putBoolean("logged", false);
-        previouslyLoggedEdit.apply();
+        pref = getSharedPreferences(LOGGED_USER, 0);
+        //Update shared logged variable
+        if(pref.getBoolean(LOGGED_USER, false)){
+            pref.edit().putBoolean(LOGGED_USER, true).commit();
+        }
 
-        //Register
-        SharedPreferences prefs = getSharedPreferences("UserLogged", 0);
-        boolean previouslyLogged = prefs.getBoolean("logged",false);
-
-        Log.d("boooooo", String.valueOf(previouslyLogged));
+        boolean previouslyLogged = pref.getBoolean(LOGGED_USER, false);
 
         if(!previouslyLogged){
             registerButton = (Button) findViewById(R.id.register);
@@ -116,10 +115,8 @@ public class Login extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    prefsEditor = getApplicationContext().getSharedPreferences("UserLogged", 0).edit();
-                    SharedPreferences.Editor previouslyLoggedEdit = prefsEditor.putBoolean("logged", true);
-                    previouslyLoggedEdit.apply();
-
+                    pref.edit().putBoolean(LOGGED_USER, true).commit();
+                    
                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(intent);
                     progressBar.setVisibility(View.GONE);
