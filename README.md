@@ -26,6 +26,11 @@ $ import project
 
 - 
 
+### ToDo
+  -Forgot Password
+  -Cloud Sync Notes
+  -Multiple Images
+
 ### Screenshot
 
 ![App](https://i.ibb.co/Nx5P3dq/Screenshot-20201003-185530816.jpg)
